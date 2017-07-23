@@ -7,18 +7,18 @@ import java.text.*;
 
 public class Main {
     protected static String REGEX_URL = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-    protected String SITE_URL = "http://www.1711141131131.xyz/"; // ignore this, do not change it!
+    protected String SITE_URL = ""; // ignore this, this is not how you configure it
     protected String SITE_HASH = "";
 
     protected List<String> URLS = new ArrayList<>();
     protected boolean ONLINE = true;
 
     public static void main(String[] args) {
-        interpret("sites.txt");
-        log("Running.");
+        interpret("sites.txt"); // read the list of sites
+        log("Running."); // tell the user that the bot is running
     }
 
-    public static void interpret(String file) {
+    public static void interpret(String file) { // read a the file sites.txt and run a new instance for each site to monitor
         try {
             try(BufferedReader br = new BufferedReader(new FileReader(new File(file)))) {
                 for(String line; (line = br.readLine()) != null; ) {
@@ -47,13 +47,11 @@ public class Main {
         TimerTask hourlyTask = new TimerTask() {
             @Override
             public void run() {
-                // System.out.println("Checking for updates on " + SITE_URL + "... " + System.currentTimeMillis());
 
                 String response = httpGET(SITE_URL);
 
                 if(SITE_HASH.length() != 0) {
                     if(!SITE_HASH.equals(MD5(response))) {
-                        // System.out.println(SITE_HASH + " != " + MD5(response));
                         generatePayload("**Alert:** The website " + SITE_URL + " has been updated!");
                     }
                 }
@@ -87,7 +85,7 @@ public class Main {
         timer.schedule(hourlyTask, 0, 1000 * 60 * mins);
     }
 
-    public static String getType(String ending) {
+    public static String getType(String ending) { // figure out what type of file it is
         switch(ending.toLowerCase()) {
             case "wav":
                 return "audio";
@@ -106,7 +104,7 @@ public class Main {
         }
     }
 
-    public String httpGET(String urlToRead) {
+    public String httpGET(String urlToRead) { // perform a GET request
         try {
             StringBuilder result = new StringBuilder();
             URL url = new URL(urlToRead);
@@ -135,11 +133,11 @@ public class Main {
         }
     }
 
-    public static void log(String args) {
+    public static void log(String args) { // simply write a message to console
         System.out.println("[" + new SimpleDateFormat("MM/dd HH:mm").format(new Date()) + "] " + args);
     }
 
-    public void generatePayload(String message) {
+    public void generatePayload(String message) { // send a message to the discord server
         try {
             URL url = new URL(Config.DISCORD_URL);
             URLConnection con = url.openConnection();
@@ -167,7 +165,7 @@ public class Main {
         }
     }
 
-    public List<String> scrapeURL(String data) {
+    public List<String> scrapeURL(String data) { // scrape URLs from the page
         List<String> urls = new ArrayList<>();
 
         Pattern pattern = Pattern.compile(REGEX_URL);
@@ -187,7 +185,7 @@ public class Main {
         return urls;
     }
 
-    public String MD5(String md5) {
+    public String MD5(String md5) { // collisions and security do not matter in this instance
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(md5.getBytes());
