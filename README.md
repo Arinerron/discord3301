@@ -1,6 +1,8 @@
 # About
 Automated Discord notifications when cicada3301's websites are updated.
 
+Uses very little RAM (maybe a megabyte) and is not CPU-intensive. Network requests are made as often as configured.
+
 # How to set up
 1. Clone this repository.
 ```
