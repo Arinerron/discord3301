@@ -15,17 +15,14 @@ public class Main {
 
     public static void main(String[] args) {
         interpret("sites.txt");
-        //new Main("http://www.1711141131131.xyz/", 4); // check every 4 minutes
-        //new Main("http://sevens.exposed/", 3); // check every 3 minutes
-       //new Main("http://cicada3301.org/", 30); // check every 30 minutes
-       log("Running.");
+        log("Running.");
     }
 
     public static void interpret(String file) {
         try {
             try(BufferedReader br = new BufferedReader(new FileReader(new File(file)))) {
                 for(String line; (line = br.readLine()) != null; ) {
-                    if(!line.trim().startsWith("#")) { // is it a comment?
+                    if(!line.trim().startsWith("#") && line.length() != 0) { // is it a comment?
                         String[] split = line.split(Pattern.quote(" "));
                         if(split.length < 2)
                             new Main(split[0], 3);

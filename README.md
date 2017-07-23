@@ -15,6 +15,7 @@ git clone https://github.com/Arinerron/discord3301/
 javac Main.java
 java Main
 ```
+6. If you'd like to change how often a site is checked, or add a new site to be checked, simply edit the file `sites.txt`.
 
 # Debugging
 Getting an error similar to this?
