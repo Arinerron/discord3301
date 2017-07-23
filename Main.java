@@ -14,10 +14,31 @@ public class Main {
     protected boolean ONLINE = true;
 
     public static void main(String[] args) {
-        new Main("http://www.1711141131131.xyz/", 4); // check every 4 minutes
-        new Main("http://sevens.exposed/", 3); // check every 3 minutes
+        interpret("sites.txt");
+        //new Main("http://www.1711141131131.xyz/", 4); // check every 4 minutes
+        //new Main("http://sevens.exposed/", 3); // check every 3 minutes
        //new Main("http://cicada3301.org/", 30); // check every 30 minutes
        log("Running.");
+    }
+
+    public static void interpret(String file) {
+        try {
+            try(BufferedReader br = new BufferedReader(new FileReader(new File(file)))) {
+                for(String line; (line = br.readLine()) != null; ) {
+                    if(!line.trim().startsWith("#")) { // is it a comment?
+                        String[] split = line.split(Pattern.quote(" "));
+                        if(split.length < 2)
+                            new Main(split[0], 3);
+                        else {
+                            new Main(split[0], Integer.parseInt(split[1]));
+                        }
+                    }
+                }
+            }
+        } catch(Exception e) {
+            log("Failed to parse sites list file!");
+            e.printStackTrace();
+        }
     }
 
     public Main(String siteurl, int mins) {
