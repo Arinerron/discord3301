@@ -10,7 +10,7 @@ git clone https://github.com/Arinerron/discord3301/
 ```
 
 2. Copy the file `Config.java.example` to `Config.java`
-3. Paste your notification endpoint from Discord between the quotation marks in the variable `DISCORD_URL`.
+3. Paste your webhook URL from Discord between the quotation marks in the variable `DISCORD_URL` (see screenshot of the webhook URL I mean here: http://imgur.com/a/P71dp).
 4. Save the file. You're ready to run the bot now.
 5. To run the bot, execute `sh run.sh` on any linux system with bash. If you don't have bash, just execute the following...
 ```

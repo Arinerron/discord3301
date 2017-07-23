@@ -2,7 +2,7 @@ public class Config {
     /*
      * How to configure:
      * 1. Copy this file to Config.java
-     * 2. Paste your notification endpoint between the "quotation marks".
+     * 2. Paste your webhook endpoint between the "quotation marks". (screenshot example: http://imgur.com/a/P71dp)
      * 3. Save the file. You're ready.
      */
 
