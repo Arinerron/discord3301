@@ -1,0 +1,14 @@
+public class Config {
+    /*
+     * How to configure:
+     * 1. Copy this file to Config.java
+     * 2. Paste your notification endpoint between the "quotation marks".
+     * 3. Save the file. You're ready.
+     */
+
+    public static String DISCORD_URL = "";
+
+    /*
+     * The reason why this file exists is so nobody commits their endpoint URL on accident to git.
+     */
+}
