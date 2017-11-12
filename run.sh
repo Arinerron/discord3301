@@ -1,8 +1,16 @@
 #!/bin/bash
 
-rm *.class > /dev/null 2>&1
-
 set -e
 
-javac Main.java
-java Main
+rm -rf bin > /dev/null 2>&1
+mkdir bin
+
+cd src
+
+javac -Xlint:-deprecation -d ../bin -cp .:../lib/* Main.java > /dev/null
+
+cd ../bin
+
+java -cp .:../lib/* Main
+
+cd ..

@@ -1,3 +1,3 @@
 # Syntax: [siteurl] [how often to check by minutes]
-http://www.1711141131131.xyz/ 4
-http://sevens.exposed/ 3
+http://www.1711141131131.xyz/ 1
+http://sevens.exposed/ 1
