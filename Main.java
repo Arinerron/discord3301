@@ -138,31 +138,32 @@ public class Main {
     }
 
     public void generatePayload(String message) { // send a message to the discord server
-        try {
-            URL url = new URL(Config.DISCORD_URL);
-            URLConnection con = url.openConnection();
-            con.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-            HttpURLConnection http = (HttpURLConnection)con;
-            http.setRequestMethod("POST");
-            http.setDoOutput(true);
-            Map<String,String> arguments = new HashMap<>();
-            arguments.put("content", message);
-            StringJoiner sj = new StringJoiner("&");
-            for(Map.Entry<String,String> entry : arguments.entrySet())
-                sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-                     + URLEncoder.encode(entry.getValue(), "UTF-8"));
-            byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
-            int length = out.length;
-            http.setFixedLengthStreamingMode(length);
-            http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            http.connect();
-            try(OutputStream os = http.getOutputStream()) {
-                os.write(out);
+        for(String url2 : Config.DISCORD_URL)
+            try {
+                URL url = new URL(url2);
+                URLConnection con = url.openConnection();
+                con.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                HttpURLConnection http = (HttpURLConnection)con;
+                http.setRequestMethod("POST");
+                http.setDoOutput(true);
+                Map<String,String> arguments = new HashMap<>();
+                arguments.put("content", message);
+                StringJoiner sj = new StringJoiner("&");
+                for(Map.Entry<String,String> entry : arguments.entrySet())
+                    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
+                         + URLEncoder.encode(entry.getValue(), "UTF-8"));
+                byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
+                int length = out.length;
+                http.setFixedLengthStreamingMode(length);
+                http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                http.connect();
+                try(OutputStream os = http.getOutputStream()) {
+                    os.write(out);
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+                System.err.println("[ERROR] Message was: " + message);
             }
-        } catch(Exception e) {
-            e.printStackTrace();
-            System.err.println("[ERROR] Message was: " + message);
-        }
     }
 
     public List<String> scrapeURL(String data) { // scrape URLs from the page

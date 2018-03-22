@@ -2,11 +2,11 @@ public class Config {
     /*
      * How to configure:
      * 1. Copy this file to Config.java
-     * 2. Paste your webhook endpoint between the "quotation marks". (screenshot example: http://imgur.com/a/P71dp)
+     * 2. Paste your webhook endpoint between the "quotation marks". (screenshot example: http://imgur.com/a/P71dp). To find out how, look for https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks
      * 3. Save the file. You're ready.
      */
 
-    public static String DISCORD_URL = "";
+    public static String DISCORD_URL = {""};
 
     /*
      * The reason why this file exists is so nobody commits their endpoint URL on accident to git.
